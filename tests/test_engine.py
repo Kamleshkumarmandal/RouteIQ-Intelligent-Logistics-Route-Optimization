@@ -40,8 +40,8 @@ class RouteEngineTests(unittest.TestCase):
             {"id": "C", "destination": "tambaram", "load": 2, "priority": 1, "deadline": "12:00"},
         ]
         vehicles = [
-            {"id": "V1", "driver": "Maya", "capacity": 3},
-            {"id": "V2", "driver": "Arun", "capacity": 3},
+            {"id": "V1", "driver": "Maya", "capacity": 4},
+            {"id": "V2", "driver": "Arun", "capacity": 4},
         ]
         plans = plan_fleet(orders, vehicles, traffic_factor=1.2)
         assigned = [order_id for plan in plans for order_id in plan["order_ids"]]
