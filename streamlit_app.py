@@ -81,7 +81,7 @@ with st.sidebar:
     speed=st.slider("Average vehicle speed (km/h)",10,60,28)
     st.session_state.traffic=traffic
     st.divider()
-    if st.button("↻ Reset demo scenario",use_container_width=True):
+    if st.button("↻ Reset demo scenario",width='stretch'):
         st.session_state.orders=demo_orders()
         st.session_state.vehicles=demo_vehicles()
         st.session_state.plans=[]
@@ -135,7 +135,7 @@ if page in ("Overview","Orders & dispatch"):
             pdk.Layer("TextLayer",data=map_points,get_position="position",get_text="name",get_size=11,get_color=[45,55,80],get_pixel_offset=[0,14],get_alignment_baseline="'top'",pickable=False),
         ]
         view=pdk.ViewState(latitude=13.035,longitude=80.215,zoom=9.7,pitch=25,bearing=0)
-        st.pydeck_chart(pdk.Deck(layers=layers,initial_view_state=view,tooltip={"text":"{name}"} if not paths else {"text":"{vehicle}"}),use_container_width=True,height=410)
+        st.pydeck_chart(pdk.Deck(layers=layers,initial_view_state=view,tooltip={"text":"{name}"} if not paths else {"text":"{vehicle}"}),width='stretch',height=410)
         st.caption("Map positions are illustrative. Use a licensed routing provider and current road network before operational use.")
 
     with right:
@@ -152,11 +152,11 @@ if page in ("Overview","Orders & dispatch"):
                 b.metric("ETA",f"{plan['estimated_minutes']:.0f} min")
                 st.caption(" → ".join(NODES[node]["name"] for node in plan["stops"]))
         st.markdown('<div class="section-title">Fleet composition</div>',unsafe_allow_html=True)
-        st.dataframe(pd.DataFrame([{"Vehicle":v["id"],"Driver":v["driver"],"Type":v.get("type","Vehicle"),"Capacity":v["capacity"]} for v in vehicles]),use_container_width=True,hide_index=True)
+        st.dataframe(pd.DataFrame([{"Vehicle":v["id"],"Driver":v["driver"],"Type":v.get("type","Vehicle"),"Capacity":v["capacity"]} for v in vehicles]),width='stretch',hide_index=True)
 
     if page=="Orders & dispatch":
         st.markdown('<div class="section-title">Delivery orders</div>',unsafe_allow_html=True)
-        st.dataframe(pd.DataFrame([{"Order":o["id"],"Customer":o["customer"],"Destination":NODES[o["destination"]]["name"],"Load":o["load"],"Priority":o["priority"],"Deadline":o["deadline"],"Status":o["status"]} for o in orders]),use_container_width=True,hide_index=True)
+        st.dataframe(pd.DataFrame([{"Order":o["id"],"Customer":o["customer"],"Destination":NODES[o["destination"]]["name"],"Load":o["load"],"Priority":o["priority"],"Deadline":o["deadline"],"Status":o["status"]} for o in orders]),width='stretch',hide_index=True)
         with st.expander("＋ Add delivery order"):
             with st.form("add_order",clear_on_submit=True):
                 a,b=st.columns(2)
@@ -199,7 +199,7 @@ elif page=="Network explorer":
         st.map(pd.DataFrame(coordinates),latitude="lat",longitude="lon",size=80,color="#6759e8")
         st.caption("Dijkstra finds the least-cost path on the configured graph. The graph is a demo abstraction and is not a live road network.")
     st.markdown('<div class="section-title">Road network nodes</div>',unsafe_allow_html=True)
-    st.dataframe(pd.DataFrame([{"Node":key,"Location":node["name"],"Latitude":node["lat"],"Longitude":node["lon"]} for key,node in NODES.items()]),use_container_width=True,hide_index=True)
+    st.dataframe(pd.DataFrame([{"Node":key,"Location":node["name"],"Latitude":node["lat"],"Longitude":node["lon"]} for key,node in NODES.items()]),width='stretch',hide_index=True)
 
 st.divider()
 st.markdown('<div class="smallcaps">DISPATCH API</div>',unsafe_allow_html=True)
