@@ -6,6 +6,9 @@ It includes a **Streamlit demo dashboard** and a separate **FastAPI route planni
 
 ## Current demo features
 
+🚚live demo
+https://routeiq-intelligent-logistics-route-optimization-3wjkdrehbcei5.streamlit.app/
+
 - Chennai-inspired sample location network and road-edge table
 - Dijkstra shortest-path route explorer
 - Capacity-aware greedy order-to-vehicle assignment
